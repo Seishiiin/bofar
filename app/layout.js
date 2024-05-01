@@ -1,4 +1,8 @@
 import { Noto_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react"
+
+
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./globals.css";
 
 const inter = Noto_Serif({ subsets: ["latin"] });
@@ -13,6 +17,7 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body className={inter.className}>
                 {children}
+                <Analytics />
             </body>
         </html>
     );
