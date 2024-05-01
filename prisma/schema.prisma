@@ -1,0 +1,48 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model dishes {
+    idD     Int     @id @default(autoincrement())
+    wording String? @db.VarChar(64)
+    picture String? @db.VarChar(64)
+    idM     Int
+    idT     Int
+    menus   menus   @relation(fields: [idM], references: [idM], onUpdate: Restrict, map: "dishes_ibfk_1")
+    types   types   @relation(fields: [idT], references: [idT], onUpdate: Restrict, map: "dishes_ibfk_2")
+
+    @@index([idM], map: "idM")
+    @@index([idT], map: "idT")
+}
+
+model menus {
+    idM     Int      @id @default(autoincrement())
+    wording String?  @db.VarChar(64)
+    price   Int?
+    dishes  dishes[]
+}
+
+model reservations {
+    idR     Int       @id @default(autoincrement())
+    name    String?   @db.VarChar(64)
+    people  Int?
+    daytime DateTime? @db.Date
+    phone   String?   @db.VarChar(16)
+}
+
+model types {
+    idT     Int      @id @default(autoincrement())
+    wording String?  @db.VarChar(64)
+    dishes  dishes[]
+}
+
+model events {
+    idE     Int       @id @default(autoincrement())
+    name    String?   @db.VarChar(64)
+    daytime DateTime? @db.Date
+}
