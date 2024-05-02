@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <div className={"w-full py-2 flex flex-col justify-center items-center z-10"}>
             <div className={"w-full grid grid-cols-1 lg:grid-cols-2 text-center gap-4 py-5 mx-auto"}>
-                <iframe className={"mx-auto w-4/6"}  height="200" src="https://maps.google.com/maps?width=200&amp;height=200&amp;hl=en&amp;q=35%20Place%20Monge,%2073000%20Chamb%C3%A9ry+(My%20Business%20Name)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe>
+                <iframe className={"mx-auto h-[200px] w-4/6"} src="https://maps.google.com/maps?width=200&amp;height=200&amp;hl=en&amp;q=35%20Place%20Monge,%2073000%20Chamb%C3%A9ry+(My%20Business%20Name)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
 
                 <div className={"mx-auto flex flex-col justify-center text-center items-center gap-2"}>
                     <h3 className={"text-xl font-bold"}>Contact</h3>
