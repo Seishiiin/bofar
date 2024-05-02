@@ -48,3 +48,9 @@ model events {
     description String?   @db.Text
     daytime     DateTime? @db.Date
 }
+
+model administrators {
+    idA      Int     @id @default(autoincrement())
+    username String? @db.VarChar(64)
+    password String? @db.VarChar(256)
+}
