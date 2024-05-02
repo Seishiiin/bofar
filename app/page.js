@@ -124,7 +124,7 @@ export default function Home() {
                 </div>
 
                 <div className={"w-full flex justify-around items-center gap-4 px-5 md:px-20"}>
-                    <p>Le Bofar est un restaurant situé à Chambéry, en Savoie. Nous vous proposons une cuisine traditionnelle et familiale, dans un cadre chaleureux et convivial. Venez découvrir nos plats faits maison, préparés avec des produits frais et de qualité. Nous vous accueillons tous les jours de la semaine, de 18h30 à 01h00, pour vous faire passer un agréable moment en notre compagnie. N'hésitez pas à réserver une table pour venir déguster nos spécialités et profiter de nos événements organisés chaque week-end.</p>
+                    <p>Le Bofar est un restaurant situé à Chambéry, en Savoie. Nous vous proposons une cuisine traditionnelle et familiale, dans un cadre chaleureux et convivial. Venez découvrir nos plats faits maison, préparés avec des produits frais et de qualité. Nous vous accueillons tous les jours de la semaine, de 18h30 à 01h00, pour vous faire passer un agréable moment en notre compagnie. N&apos;hésitez pas à réserver une table pour venir déguster nos spécialités et profiter de nos événements organisés chaque week-end.</p>
                     <img src="/restaurant.jpg" alt="Restaurant" className={"hidden md:block w-1/2 h-full object-cover rounded-md"}/>
                 </div>
             </div>
