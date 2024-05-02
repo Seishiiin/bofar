@@ -39,7 +39,7 @@ export default function SignIn() {
 
     return (
         <main>
-            {errorCode === 401 && <p className={"text-red-500"}>Nom d'utilisateur ou mot de passe incorrect</p>}
+            {errorCode === 401 && <p className={"text-red-500"}>Nom d&apos;utilisateur ou mot de passe incorrect</p>}
             {errorCode === 500 && <p className={"text-red-500"}>Une erreur est survenue</p>}
             <form onSubmit={onSubmit} className={"p-10"}>
                 <input name={"username"} type="text" className={"border-4 border-black mr-3"} value={conexion.username} onChange={event => setConexion({...conexion, username: event.target.value})} />
