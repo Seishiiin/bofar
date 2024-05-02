@@ -42,7 +42,8 @@ model types {
 }
 
 model events {
-    idE     Int       @id @default(autoincrement())
-    name    String?   @db.VarChar(64)
-    daytime DateTime? @db.Date
+    idE         Int       @id @default(autoincrement())
+    name        String?   @db.VarChar(64)
+    description String?   @db.Text
+    daytime     DateTime? @db.Date
 }

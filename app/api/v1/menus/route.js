@@ -5,6 +5,9 @@ export async function GET() {
         include: {
             dishes: true,
         },
+        orderBy: {
+            price: "asc",
+        }
     });
 
     return Response.json(menus);

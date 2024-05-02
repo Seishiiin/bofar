@@ -19,12 +19,12 @@ export default function Navbar() {
 
                 <div className="hidden md:flex items-center gap-10">
                     <Link href={"/"}>Accueil</Link>
-                    <Link href={"/menu"}>Menu</Link>
+                    <Link href={"/events"}>Évènements</Link>
                     <Link href={"/contact"}>Contact</Link>
                 </div>
                 <div className="flex md:hidden items-center gap-5">
                     <Link href={"/"}>{url === "/" ? <i className={"bi bi-house-fill text-2xl"}></i> : <i className={"bi bi-house text-2xl"}></i>}</Link>
-                    <Link href={"/menu"}>{url === "/menu" ? <i className={"bi bi-bookmark-fill text-2xl"}></i> : <i className={"bi bi-bookmark text-2xl"}></i>}</Link>
+                    <Link href={"/events"}>{url === "/events" ? <i className={"bi bi-calendar-fill text-2xl"}></i> : <i className={"bi bi-calendar text-2xl"}></i>}</Link>
                     <Link href={"/contact"}>{url === "/contact" ? <i className={"bi bi-telephone-fill text-2xl"}></i> : <i className={"bi bi-telephone text-2xl"}></i>}</Link>
                 </div>
             </div>
