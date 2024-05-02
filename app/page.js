@@ -93,8 +93,7 @@ export default function Home() {
                             <hr className={"my-2 border-gray-300"}/>
                             <p className={"line-clamp-3"}>{event.description}</p>
                             <div className={"flex justify-between items-baseline gap-2 mt-2"}>
-                                <p className={"flex justify-left items-start gap-2 line-clamp-1 text-lg font-black"}><i
-                                    className="bi bi-calendar"></i> {(event.daytime).split("T")[0]}</p>
+                                <p className={"flex justify-left items-start gap-2 line-clamp-1 text-lg font-black"}><i className="bi bi-calendar"></i> {(new Date(event.daytime).toLocaleDateString())}</p>
                                 <Link href={`/events/${snakeCase(event.name)}`}
                                       className={"bg-green-950/80 hover:bg-green-950 flex justify-center items-center gap-2 text-white text-sm mt-5 px-3 py-2 rounded-md"}><i
                                     className={"bi bi-eye"}></i> Voir plus</Link>
@@ -112,13 +111,13 @@ export default function Home() {
 
                 <div className={"w-full grid grid-cols-1 lg:grid-cols-3 gap-4 px-5 md:px-20"}>
                     <div className={"relative"}>
-                        <img src="/ouvrier/1.jpg" alt="Gallery 1" className={"w-full h-full object-cover rounded-md"}/>
+                        <img src="/premium/2.jpg" alt="Gallery 1" className={"w-full h-5/6 object-cover rounded-md"}/>
                     </div>
                     <div className={"relative"}>
-                        <img src="/ouvrier/2.jpg" alt="Gallery 2" className={"w-full h-full object-cover rounded-md"}/>
+                        <img src="/ouvrier/3.jpg" alt="Gallery 2" className={"w-full h-5/6 object-cover rounded-md"}/>
                     </div>
                     <div className={"relative"}>
-                        <img src="/ouvrier/3.jpg" alt="Gallery 3" className={"w-full h-full object-cover rounded-md"}/>
+                        <img src="/terroir/1.jpg" alt="Gallery 3" className={"w-full h-5/6 object-cover rounded-md"}/>
                     </div>
                 </div>
             </div>
