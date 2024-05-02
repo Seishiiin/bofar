@@ -23,6 +23,7 @@ model dishes {
 model menus {
     idM     Int      @id @default(autoincrement())
     wording String?  @db.VarChar(64)
+    url     String?  @db.VarChar(64)
     price   Int?
     dishes  dishes[]
 }
