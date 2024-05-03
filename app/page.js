@@ -144,7 +144,7 @@ export default function Home() {
                             semaine, de 18h30 à 01h00, pour vous faire passer un agréable moment en notre compagnie.
                             N&apos;hésitez pas à réserver une table pour venir déguster nos spécialités et profiter de
                             nos événements organisés chaque week-end.</p>
-                        <p>"Bofar" signifie "manger" en patois savoyard.</p>
+                        <p>&quot;Bofar&quot; signifie &quot;manger&quot; en patois savoyard.</p>
                     </div>
                     <img src="/restaurant.jpg" alt="Restaurant"
                          className={"hidden md:block w-1/2 h-full object-cover rounded-md"}/>
