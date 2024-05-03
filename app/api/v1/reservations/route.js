@@ -16,11 +16,9 @@ export async function POST(req) {
             phone: body.phone
         }
     }).then(() => {
-        // return 200 status response
-        response = { message: "Votre réservation à bien été prise en compte", status: 200 };
+        response = { message: "Votre réservation a bien été prise en compte. En cas de changement, contactez-nous au 07 46 46 35 24", status: 200 };
     }
     ).catch((error) => {
-        // return 500 status response
         response = { message: error.message, status: 500 };
     });
 

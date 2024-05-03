@@ -3,11 +3,15 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
-import { snakeCase } from "snake-case";
+import {snakeCase} from "snake-case";
 import {useEffect, useState} from "react";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     const [menus, setMenus] = useState([]);
     const [events, setEvents] = useState([]);
 
@@ -93,7 +97,8 @@ export default function Home() {
                             <hr className={"my-2 border-gray-300"}/>
                             <p className={"line-clamp-3"}>{event.description}</p>
                             <div className={"flex justify-between items-baseline gap-2 mt-2"}>
-                                <p className={"flex justify-left items-start gap-2 line-clamp-1 text-lg font-black"}><i className="bi bi-calendar"></i> {(new Date(event.daytime).toLocaleDateString())}</p>
+                                <p className={"flex justify-left items-start gap-2 line-clamp-1 text-lg font-black"}><i
+                                    className="bi bi-calendar"></i> {(new Date(event.daytime).toLocaleDateString())}</p>
                                 <Link href={`/events/${snakeCase(event.name)}`}
                                       className={"bg-green-950/80 hover:bg-green-950 flex justify-center items-center gap-2 text-white text-sm mt-5 px-3 py-2 rounded-md"}><i
                                     className={"bi bi-eye"}></i> Voir plus</Link>
@@ -111,13 +116,16 @@ export default function Home() {
 
                 <div className={"w-full grid grid-cols-1 lg:grid-cols-3 gap-4 px-5 md:px-20"}>
                     <div className={"relative"}>
-                        <img src="/premium/2.jpg" alt="Gallery 1" className={"w-full h-5/6 object-cover rounded-md"}/>
+                        <img src={"/premium/" + (getRandomInt(3) + 1) + ".jpg"} alt="Gallery 1"
+                             className={"w-full h-5/6 object-cover rounded-md"}/>
                     </div>
                     <div className={"relative"}>
-                        <img src="/ouvrier/3.jpg" alt="Gallery 2" className={"w-full h-5/6 object-cover rounded-md"}/>
+                        <img src={"/ouvrier/" + (getRandomInt(3) + 1) + ".jpg"} alt="Gallery 2"
+                             className={"w-full h-5/6 object-cover rounded-md"}/>
                     </div>
                     <div className={"relative"}>
-                        <img src="/terroir/1.jpg" alt="Gallery 3" className={"w-full h-5/6 object-cover rounded-md"}/>
+                        <img src={"/terroir/" + (getRandomInt(3) + 1) + ".jpg"} alt="Gallery 3"
+                             className={"w-full h-5/6 object-cover rounded-md"}/>
                     </div>
                 </div>
             </div>
@@ -129,12 +137,15 @@ export default function Home() {
                 </div>
 
                 <div className={"w-full flex justify-around items-center gap-4 px-5 md:px-20"}>
-                    <p>Le Bofar est un restaurant situé à Chambéry. Nous vous proposons une cuisine traditionnelle et
-                        familiale, dans un cadre chaleureux et convivial. Venez découvrir nos plats faits maison,
-                        préparés avec des produits frais et de qualité. Nous vous accueillons tous les jours de la
-                        semaine, de 18h30 à 01h00, pour vous faire passer un agréable moment en notre compagnie.
-                        N&apos;hésitez pas à réserver une table pour venir déguster nos spécialités et profiter de nos
-                        événements organisés chaque week-end.</p>
+                    <div className={"flex flex-col gap-4 w-full md:w-1/2"}>
+                        <p>Le Bofar est un restaurant situé à Chambéry. Nous vous proposons une cuisine traditionnelle
+                            et familiale, dans un cadre chaleureux et convivial. Venez découvrir nos plats faits maison,
+                            préparés avec des produits frais et de qualité. Nous vous accueillons tous les jours de la
+                            semaine, de 18h30 à 01h00, pour vous faire passer un agréable moment en notre compagnie.
+                            N&apos;hésitez pas à réserver une table pour venir déguster nos spécialités et profiter de
+                            nos événements organisés chaque week-end.</p>
+                        <p>"Bofar" signifie "manger" en patois savoyard.</p>
+                    </div>
                     <img src="/restaurant.jpg" alt="Restaurant"
                          className={"hidden md:block w-1/2 h-full object-cover rounded-md"}/>
                 </div>

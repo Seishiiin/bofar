@@ -23,8 +23,7 @@ export default function Menu({params}) {
             <Navbar/>
 
             <div className={"w-full px-10 border-b"}>
-                <a href={"/"} className={"hover:underline"}>Accueil</a> / <a href={"/menus"}
-                                                                             className={"hover:underline"}>Menus</a> / {menu.wording}
+                <a href={"/"} className={"hover:underline"}>Accueil</a> / <a href={"/menus"} className={"hover:underline"}>Menus</a> / {menu.wording}
             </div>
 
             <div className={"w-full flex justify-between items-baseline py-10 px-5 md:px-20"}>
