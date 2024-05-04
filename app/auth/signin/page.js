@@ -4,6 +4,9 @@ import {useEffect, useState} from "react";
 import {signIn, useSession} from "next-auth/react";
 import {useRouter} from "next/navigation";
 
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 export default function SignIn() {
     const router = useRouter()
     const {status} = useSession()
@@ -39,13 +42,29 @@ export default function SignIn() {
 
     return (
         <main>
-            {errorCode === 401 && <p className={"text-red-500"}>Nom d&apos;utilisateur ou mot de passe incorrect</p>}
-            {errorCode === 500 && <p className={"text-red-500"}>Une erreur est survenue</p>}
-            <form onSubmit={onSubmit} className={"p-10"}>
-                <input name={"username"} type="text" className={"border-4 border-black mr-3"} value={conexion.username} onChange={event => setConexion({...conexion, username: event.target.value})} />
-                <input name={"password"} type="text" className={"border-4 border-black"} value={conexion.password} onChange={event => setConexion({...conexion, password: event.target.value})} />
-                <button type="submit">Connexion</button>
-            </form>
+            <Navbar />
+
+            <div className={"w-full flex flex-col items-center py-10"}>
+                <h1 className={"text-4xl font-bold text-center"}>Connexion au panneau d'administration</h1>
+                <hr className={"w-1/3 my-5"} />
+
+                {errorCode === 401 && <p className={"text-red-500"}>Identifiants incorrects</p>}
+                {errorCode === 500 && <p className={"text-red-500"}>Erreur de connexion</p>}
+
+                <form onSubmit={onSubmit} className={"w-full flex flex-col items-center px-5"}>
+                    <div className={"w-full md:w-1/3"}>
+                        <label className={"font-bold"} htmlFor={"username"}>Nom d'utilisateur</label>
+                        <input className={"w-full px-2 py-1 border border-black rounded"} name={"username"} type="text" value={conexion.username} onChange={event => setConexion({...conexion, username: event.target.value})} />
+                    </div>
+                    <div className={"w-full md:w-1/3 mt-5"}>
+                        <label className={"font-bold"} htmlFor={"password"}>Mot de passe</label>
+                        <input className={"w-full px-2 py-1 border border-black rounded"} name={"password"} type="text" value={conexion.password} onChange={event => setConexion({...conexion, password: event.target.value})} />
+                    </div>
+                    <button type={"submit"} className={"w-full md:w-1/3 bg-green-950 text-white rounded py-2 px-5 mt-5"}>Se connecter</button>
+                </form>
+            </div>
+
+            <Footer />
         </main>
     )
 }
