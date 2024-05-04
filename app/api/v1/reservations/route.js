@@ -3,7 +3,7 @@ import { prisma } from "@/lib/database";
 export async function GET(req) {
     const reservations = await prisma.reservations.findMany({
         orderBy: {
-                daytime: 'asc'
+                daytime: "asc"
         }
     });
 

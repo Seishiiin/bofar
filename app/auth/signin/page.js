@@ -45,7 +45,7 @@ export default function SignIn() {
             <Navbar />
 
             <div className={"w-full flex flex-col items-center py-10"}>
-                <h1 className={"text-4xl font-bold text-center"}>Connexion au panneau d'administration</h1>
+                <h1 className={"text-4xl font-bold text-center"}>Connexion au panneau d&apos;administration</h1>
                 <hr className={"w-1/3 my-5"} />
 
                 {errorCode === 401 && <p className={"text-red-500"}>Identifiants incorrects</p>}
@@ -53,7 +53,7 @@ export default function SignIn() {
 
                 <form onSubmit={onSubmit} className={"w-full flex flex-col items-center px-5"}>
                     <div className={"w-full md:w-1/3"}>
-                        <label className={"font-bold"} htmlFor={"username"}>Nom d'utilisateur</label>
+                        <label className={"font-bold"} htmlFor={"username"}>Nom d&apos;utilisateur</label>
                         <input className={"w-full px-2 py-1 border border-black rounded"} name={"username"} type="text" value={conexion.username} onChange={event => setConexion({...conexion, username: event.target.value})} />
                     </div>
                     <div className={"w-full md:w-1/3 mt-5"}>

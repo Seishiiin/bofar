@@ -2,7 +2,7 @@
 
 import NavbarAdmin from "@/components/NavbarAdmin";
 import MenuAdmin from "@/components/MenuAdmin";
-import Modal from 'react-modal'
+import Modal from "react-modal"
 
 import {useEffect, useState} from "react";
 
@@ -125,11 +125,11 @@ export default function AdministrationReservations() {
                     <button onClick={() => closeModal()}><i className="bi bi-x-lg text-2xl cursor-pointer"></i></button>
                 </div>
                 <form className="w-full md:w-1/2 mx-auto my-20 grid grid-cols-1 gap-4" onSubmit={onSubmit}>
-                    <input type="text" name={'name'} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Nom" value={name} onChange={(e) => setName(e.target.value)}/>
-                    <input type="number" name={'people'} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Nombre de personnes" value={Number.parseInt(people)} onChange={(e) => setPeople(e.target.value)}/>
-                    <input type="date" name={'daytime'} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)}/>
-                    <input type="text" name={'phone'} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Téléphone" value={phone} onChange={(e) => setPhone(e.target.value)}/>
-                    <input type="text" name={'idR'} value={idR}/>
+                    <input type="text" name={"name"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Nom" value={name} onChange={(e) => setName(e.target.value)}/>
+                    <input type="number" name={"people"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Nombre de personnes" value={Number.parseInt(people)} onChange={(e) => setPeople(e.target.value)}/>
+                    <input type="date" name={"daytime"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)}/>
+                    <input type="text" name={"phone"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Téléphone" value={phone} onChange={(e) => setPhone(e.target.value)}/>
+                    <input type="text" name={"idR"} value={idR}/>
                     <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-md">Modifier</button>
                 </form>
             </Modal>
