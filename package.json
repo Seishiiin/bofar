@@ -18,7 +18,9 @@
         "react": "^18",
         "react-dom": "^18",
         "react-modal": "^3.16.1",
-        "snake-case": "^4.0.0"
+        "snake-case": "^4.0.0",
+        "vfile": "^6.0.1",
+        "vfile-rename": "^3.0.0"
     },
     "devDependencies": {
         "eslint": "^8",

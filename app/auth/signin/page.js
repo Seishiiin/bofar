@@ -58,7 +58,7 @@ export default function SignIn() {
                     </div>
                     <div className={"w-full md:w-1/3 mt-5"}>
                         <label className={"font-bold"} htmlFor={"password"}>Mot de passe</label>
-                        <input className={"w-full px-2 py-1 border border-black rounded"} name={"password"} type="text" value={conexion.password} onChange={event => setConexion({...conexion, password: event.target.value})} />
+                        <input className={"w-full px-2 py-1 border border-black rounded"} name={"password"} type="password" value={conexion.password} onChange={event => setConexion({...conexion, password: event.target.value})} />
                     </div>
                     <button type={"submit"} className={"w-full md:w-1/3 bg-green-950 text-white rounded py-2 px-5 mt-5"}>Se connecter</button>
                 </form>

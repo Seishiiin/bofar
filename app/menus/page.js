@@ -38,9 +38,6 @@ export default function Menus() {
                         <div className={"flex justify-between items-baseline gap-2 mt-2"}>
                             <p className={"flex justify-left items-start gap-2 line-clamp-1 text-lg font-black"}><i
                                 className="bi bi-coin"></i> {menu.price}€</p>
-                            <Link href={`/menus/${menu.url}`}
-                                  className={"bg-green-950/80 hover:bg-green-950 flex justify-center items-center gap-2 text-white text-sm mt-5 px-3 py-2 rounded-md"}><i
-                                className={"bi bi-eye"}></i> Voir plus</Link>
                         </div>
                     </div>
                 ))}

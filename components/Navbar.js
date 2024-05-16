@@ -23,13 +23,11 @@ export default function Navbar() {
                     <Link href={"/"} className={url === "/" ? "font-bold" : ""}>Accueil</Link>
                     <Link href={"/menus"} className={url === "/menus" ? "font-bold" : ""}>Menus</Link>
                     <Link href={"/events"} className={url === "/events" ? "font-bold" : ""}>Événements</Link>
-                    <Link href={"/gallery"} className={url === "/gallery" ? "font-bold" : ""}>Galerie</Link>
                 </div>
                 <div className="flex md:hidden items-center gap-5">
                     <Link href={"/"}>{url === "/" ? <i className={"bi bi-house-fill text-2xl"}></i> : <i className={"bi bi-house text-2xl"}></i>}</Link>
                     <Link href={"/menus"}>{url === "/menus" ? <i className={"bi bi-card-list text-2xl"}></i> : <i className={"bi bi-card-list text-2xl"}></i>}</Link>
                     <Link href={"/events"}>{url === "/events" ? <i className={"bi bi-calendar-event-fill text-2xl"}></i> : <i className={"bi bi-calendar-event text-2xl"}></i>}</Link>
-                    <Link href={"/gallery"}>{url === "/gallery" ? <i className={"bi bi-camera-fill text-2xl"}></i> : <i className={"bi bi-camera text-2xl"}></i>}</Link>
                 </div>
             </div>
         </div>

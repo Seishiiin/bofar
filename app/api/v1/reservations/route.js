@@ -3,7 +3,7 @@ import { prisma } from "@/lib/database";
 export async function GET(req) {
     const reservations = await prisma.reservations.findMany({
         orderBy: {
-                daytime: "asc"
+            daytime: "asc"
         }
     });
 
@@ -11,26 +11,46 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
+    const { name, people, daytime, phone } = await req.json();
 
-    const body = await req.json();
-    let response = {
-        message: "",
-        status: 0
-    };
-
-    await prisma.reservations.create({
+    const reservation = await prisma.reservations.create({
         data: {
-            name: body.name,
-            people: Number.parseInt(body.people),
-            daytime: new Date(body.daytime).toISOString(),
-            phone: body.phone
+            name: name,
+            people: Number.parseInt(people),
+            daytime: new Date(daytime).toISOString(),
+            phone: phone,
         }
-    }).then(() => {
-        response = { message: "Votre réservation a bien été prise en compte. En cas de changement, contactez-nous au 07 46 46 35 24", status: 200 };
-    }
-    ).catch((error) => {
-        response = { message: error.message, status: 500 };
     });
 
-    return Response.json(response);
+    return Response.json(reservation);
+}
+
+export async function PUT(req) {
+    const { id, name, people, daytime, phone } = await req.json();
+
+    const reservation = await prisma.reservations.update({
+        where: {
+            idR: id
+        },
+        data: {
+            name: name,
+            people: Number.parseInt(people),
+            daytime: new Date(daytime).toISOString(),
+            phone: phone
+        }
+    });
+
+    return Response.json(reservation);
+}
+
+export async function DELETE(req) {
+    const { id } = await req.json();
+
+    await prisma.reservations.delete({
+        where: {
+            idR: id
+        }
+    });
+
+    return Response.json({ message: "Reservation deleted" });
 }

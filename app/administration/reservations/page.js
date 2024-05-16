@@ -1,138 +1,188 @@
-"use client"
+"use client";
 
 import NavbarAdmin from "@/components/NavbarAdmin";
 import MenuAdmin from "@/components/MenuAdmin";
-import Modal from "react-modal"
 
 import {useEffect, useState} from "react";
+import Modal from "react-modal";
 
-export default function AdministrationReservations() {
+export default function AdminReservations() {
+    const [isOpen, setIsOpen] = useState(false)
+    const [isOpenCreate, setIsOpenCreate] = useState(false)
+
     const [reservations, setReservations] = useState([])
 
-    const [idR, setIdR] = useState(null)
+    const [id, setId] = useState(null)
     const [name, setName] = useState("")
     const [people, setPeople] = useState(null)
-    const [date, setDate] = useState("")
+    const [daytime, setDaytime] = useState("")
     const [phone, setPhone] = useState("")
-
-    const [isOpen, setIsOpen] = useState(false)
 
     const fetchReservations = async () => {
         const response = await fetch("/api/v1/reservations", {
-            cache: "no-cache",
+            cache: "no-cache"
         })
         const data = await response.json()
         setReservations(data)
     }
-
     const editReservation = async (id) => {
         setIsOpen(true)
+        setId(id)
 
-        setIdR(id)
         reservations.map((reservation) => {
             if (reservation.idR === id) {
                 setName(reservation.name)
                 setPeople(reservation.people)
-                setDate(new Date(reservation.daytime).toISOString().split("T")[0])
+                setDaytime(new Date(reservation.daytime).toISOString().split("T")[0])
                 setPhone(reservation.phone)
             }
         })
     }
+    const createReservation = async () => {
+        setIsOpenCreate(true)
+    }
+    const deleteReservation = async (id) => {
+        await fetch(`/api/v1/reservations`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        })
 
+        fetchReservations()
+    }
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+
+        await fetch(`/api/v1/reservations/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                people: people,
+                daytime: daytime,
+                phone: phone
+            })
+        })
+
+        fetchReservations()
+        closeModal()
+    }
+    const onSubmitCreate = async (e) => {
+        e.preventDefault()
+
+        await fetch(`/api/v1/reservations/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                people: people,
+                daytime: daytime,
+                phone: phone
+            })
+        })
+
+        fetchReservations()
+        closeModalCreate()
+    }
     const closeModal = () => {
         setIsOpen(false)
 
+        setId(null)
         setName("")
         setPeople(null)
-        setDate("")
+        setDaytime("")
         setPhone("")
     }
-
-    const deleteReservation = async (id) => {
-        const response = await fetch(`/api/v1/reservations/${id}`, {
-            method: "DELETE",
-            cache: "no-cache",
-        })
-        const data = await response.json()
-        setReservations(data)
-    }
-
-    const onSubmit = async (e) => {
-        e.preventDefault()
-        const response = await fetch(`/api/v1/reservations/${idR}`, {
-            method: "PUT",
-            cache: "no-cache",
-        })
-
-        setIsOpen(false)
+    const closeModalCreate = () => {
+        setIsOpenCreate(false)
 
         setName("")
         setPeople(null)
-        setDate("")
+        setDaytime("")
         setPhone("")
     }
 
     useEffect(() => {
         fetchReservations()
-    }, []);
+    }, [])
 
     return (
         <main>
-            <NavbarAdmin />
-            <MenuAdmin />
+            <NavbarAdmin/>
+            <MenuAdmin/>
 
-            <div className="w-full p-4">
-                <h1 className={"text-4xl font-black mb-5"}>Ensemble des réservations</h1>
-                <div className="block md:flex gap-4 mb-3">
-                    <input type="text" className="w-full p-2 border border-gray-300 rounded-md" placeholder="Rechercher par nom..." onChange={(e) => setName(e.target.value)}/>
-                    <input type="text" className="w-full p-2 border border-gray-300 rounded-md" placeholder="Rechercher par numéro de téléphone..." onChange={(e) => setPhone(e.target.value)}/>
+            <div className={"w-full h-auto flex flex-col justify-start items-center"}>
+                <div className={"w-full flex justify-between items-center p-4 sticky top-0 bg-white shadow-sm"}>
+                    <input type={"text"} placeholder={"Rechercher par nom..."} className={"w-1/3 p-2 border rounded-md"} value={name} onChange={(e) => setName(e.target.value)}/>
+                    <button className={"bg-blue-500 hover:bg-blue-700 text-white rounded-md p-2"} onClick={() => createReservation()}><i className={"bi bi-plus-lg mr-2"}/> Créer une réservation</button>
                 </div>
-                <hr className={"my-2 border-gray-300"}/>
-                <table className="w-full table-auto text-lg mb-3">
-                    <thead className={"border-b border-gray-300"}>
-                    <tr className={"border-b border-gray-300"}>
-                        <th className="text-left">Nom</th>
-                        <th className="text-center">Personnes</th>
-                        <th className="text-center">Téléphone</th>
-                        <th className={"text-right hidden md:block"}>Date</th>
-                        <th className={"text-right"}></th>
-                        <th className={"text-right"}></th>
-                    </tr>
+
+                <table className={"w-full"}>
+                    <thead>
+                        <tr>
+                            <th className={"border p-2"}>Nom</th>
+                            <th className={"border p-2"}>Personnes</th>
+                            <th className={"border p-2"}>Date</th>
+                            <th className={"border p-2"}>Téléphone</th>
+                            <th className={"border p-2"}>Actions</th>
+                        </tr>
                     </thead>
-                    <tbody className={"divide-y divide-gray-300"}>
-                    {reservations.filter(reservation => new Date(reservation.daytime) >= new Date()).filter(reservation => reservation.name.toLowerCase().includes(name.toLowerCase())).filter(reservation => reservation.phone.includes(phone)).length === 0 && (
-                        <tr key={0} className={"hover:bg-gray-100"}>
-                            <td colSpan={6} className="text-center">Aucune réservation trouvée</td>
-                        </tr>
-                    )}
-                    {reservations.filter(reservation => new Date(reservation.daytime) >= new Date()).filter(reservation => reservation.name.toLowerCase().includes(name.toLowerCase())).filter(reservation => reservation.phone.includes(phone)).map((reservation => (
-                        <tr key={reservation.idR} className={"hover:bg-gray-100"}>
-                            <td className="text-left">{reservation.name}</td>
-                            <td className="text-center">{reservation.people}</td>
-                            <td className="text-center">{reservation.phone}</td>
-                            <td className="text-right hidden md:block">{new Date(reservation.daytime).toLocaleDateString()}</td>
-                            <td className="text-right" onClick={() => editReservation(reservation.idR)}><i className="bi bi-pencil text-blue-500 cursor-pointer"></i></td>
-                            <td className="text-right" onClick={() => deleteReservation(reservation.idR)}><i className="bi bi-trash text-red-500 cursor-pointer"></i></td>
-                        </tr>
-                    )))}
+                    <tbody>
+                        {reservations.filter((reservations) => reservations.daytime >= new Date().toISOString()).filter((reservations) => reservations.name.toLowerCase().includes(name.toLowerCase())).map((reservation) => (
+                            <tr key={reservation.idR}>
+                                <td className={"border p-2 text-center"}>{reservation.name.toUpperCase()}</td>
+                                <td className={"border p-2 text-center"}>{reservation.people}</td>
+                                <td className={"border p-2 text-center"}>{new Date(reservation.daytime).toLocaleDateString()}</td>
+                                <td className={"border p-2 text-center"}>{reservation.phone}</td>
+                                <td className={"border p-2 flex justify-center items-center gap-2"}>
+                                    <button className={"bg-gray-100 hover:bg-yellow-500 hover:text-white duration-300 rounded-full px-3 py-2"} onClick={() => editReservation(reservation.idR)}><i className={"bi bi-pencil"}/></button>
+                                    <button className={"bg-gray-100 hover:bg-red-500 hover:text-white duration-300 rounded-full px-3 py-2 ml-2"} onClick={() => deleteReservation(reservations.idR)}><i className={"bi bi-trash"}/></button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
 
-            <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} className={"w-full md:w-1/2 mx-auto my-20 p-5 bg-white rounded-md border-2 border-black"}>
-                <div className={"flex justify-between items-center mb-3"}>
-                    <h1 className={"text-2xl font-black"}>Modifier une réservation</h1>
-                    <button onClick={() => closeModal()}><i className="bi bi-x-lg text-2xl cursor-pointer"></i></button>
+            <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} className={"w-full md:w-1/2 mx-auto my-20 p-5 bg-white rounded-md shadow-xl"} overlayClassName={"w-full h-full bg-black/80 fixed top-0 left-0"}>
+                <div className={"flex justify-between items-center mb-5"}>
+                    <h2 className={"text-lg font-semibold"}>Modifier une réservation</h2>
+                    <button onClick={() => closeModal()} className={"cursor-pointer bg-red-500 hover:bg-red-700 text-white rounded-full px-3 py-2"}><i className={"bi bi-x-lg"}/></button>
                 </div>
-                <form className="w-full md:w-1/2 mx-auto my-20 grid grid-cols-1 gap-4" onSubmit={onSubmit}>
-                    <input type="text" name={"name"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Nom" value={name} onChange={(e) => setName(e.target.value)}/>
-                    <input type="number" name={"people"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Nombre de personnes" value={Number.parseInt(people)} onChange={(e) => setPeople(e.target.value)}/>
-                    <input type="date" name={"daytime"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)}/>
-                    <input type="text" name={"phone"} className="w-full p-2 border border-gray-300 rounded-md" placeholder="Téléphone" value={phone} onChange={(e) => setPhone(e.target.value)}/>
-                    <input type="text" name={"idR"} value={idR}/>
-                    <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-md">Modifier</button>
+
+                <form onSubmit={(e) => onSubmit(e)} className={"w-full flex flex-col gap-2"}>
+                    <input type={"text"} value={id}/>
+                    <input type={"text"} placeholder={"Nom"} value={name} onChange={(e) => setName(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <input type={"number"} placeholder={"Personnes"} value={people} onChange={(e) => setPeople(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <input type={"date"} placeholder={"Date"} value={daytime} onChange={(e) => setDaytime(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <input type={"tel"} placeholder={"Téléphone"} value={phone} onChange={(e) => setPhone(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white rounded-md p-2"}>Modifier</button>
+                </form>
+            </Modal>
+            <Modal isOpen={isOpenCreate} onRequestClose={() => setIsOpenCreate(false)} className={"w-full md:w-1/2 mx-auto my-20 p-5 bg-white rounded-md shadow-xl"} overlayClassName={"w-full h-full bg-black/80 fixed top-0 left-0"}>
+                <div className={"flex justify-between items-center mb-5"}>
+                    <h2 className={"text-lg font-semibold"}>Créer une réservation</h2>
+                    <button onClick={() => closeModalCreate()} className={"cursor-pointer bg-red-500 hover:bg-red-700 text-white rounded-full px-3 py-2"}><i className={"bi bi-x-lg"}/></button>
+                </div>
+
+                <form onSubmit={(e) => onSubmitCreate(e)} className={"w-full flex flex-col gap-2"}>
+                    <input type={"text"} placeholder={"Nom"} value={name} onChange={(e) => setName(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <input type={"number"} placeholder={"Personnes"} value={people} onChange={(e) => setPeople(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <input type={"date"} placeholder={"Date"} value={daytime} onChange={(e) => setDaytime(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <input type={"tel"} placeholder={"Téléphone"} value={phone} onChange={(e) => setPhone(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
+                    <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white rounded-md p-2"}>Créer</button>
                 </form>
             </Modal>
         </main>
-    )
+)
 }

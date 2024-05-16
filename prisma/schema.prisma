@@ -10,7 +10,6 @@ datasource db {
 model dishes {
     idD     Int     @id @default(autoincrement())
     wording String? @db.VarChar(64)
-    picture String? @db.VarChar(64)
     idM     Int
     idT     Int
     menus   menus   @relation(fields: [idM], references: [idM], onUpdate: Restrict, map: "dishes_ibfk_1")
@@ -45,7 +44,6 @@ model types {
 model events {
     idE         Int       @id @default(autoincrement())
     name        String?   @db.VarChar(64)
-    url         String?   @db.VarChar(64)
     description String?   @db.Text
     daytime     DateTime? @db.Date
 }
