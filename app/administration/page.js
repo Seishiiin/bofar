@@ -138,7 +138,7 @@ export default function Administration() {
                     </div>
                     <div className={"w-full flex justify-between items-center"}>
                         <div>
-                            <p className={"text-sm text-gray-500"}>Nombre d'évènements: {events.filter(event => new Date(event.daytime).toDateString() === new Date().toDateString()).length}</p>
+                            <p className={"text-sm text-gray-500"}>Nombre d&apos;évènements: {events.filter(event => new Date(event.daytime).toDateString() === new Date().toDateString()).length}</p>
                         </div>
                         <Link href={"/administration/events"} className={"bg-green-950 text-white px-4 py-2 rounded-lg"}>Voir plus</Link>
                     </div>

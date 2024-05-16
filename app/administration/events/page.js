@@ -137,7 +137,7 @@ export default function AdminEvents() {
                                 <div className={"flex flex-row justify-between items-center"}>
                                     <div className={"flex justify-start items-center gap-2"}>
                                         {new Date(event.daytime).toDateString() === new Date().toDateString() ? (
-                                            <p className={"text-sm text-green-500 bg-green-100 rounded-full px-3"}>aujourd'hui</p>
+                                            <p className={"text-sm text-green-500 bg-green-100 rounded-full px-3"}>aujourd&apos;hui</p>
                                         ) : new Date(event.daytime) < new Date() ? (
                                             <p className={"text-sm text-red-500 bg-red-100 rounded-full px-3"}>passé</p>
                                         ) : (
@@ -163,8 +163,8 @@ export default function AdminEvents() {
                 </div>
                 <form className={"w-full grid grid-cols-1 gap-4"} onSubmit={onSubmit}>
                     <input type={"hidden"} value={id}/>
-                    <input type={"text"} className={"w-full p-2 border border-gray-300 rounded-md"} placeholder={"Nom de l'événement"} value={name} onChange={(e) => setName(e.target.value)}/>
-                    <textarea className={"w-full h-48 p-2 border border-gray-300 rounded-md resize-none"} placeholder={"Description de l'événement"} value={description} onChange={(e) => setDescription(e.target.value)}/>
+                    <input type={"text"} className={"w-full p-2 border border-gray-300 rounded-md"} placeholder={"Nom de l&apos;événement"} value={name} onChange={(e) => setName(e.target.value)}/>
+                    <textarea className={"w-full h-48 p-2 border border-gray-300 rounded-md resize-none"} placeholder={"Description de l&apos;événement"} value={description} onChange={(e) => setDescription(e.target.value)}/>
                     <input type={"date"} className={"w-full p-2 border border-gray-300 rounded-md"} value={daytime} onChange={(e) => setDaytime(e.target.value)}/>
                     <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white rounded-md p-2"}>Modifier</button>
                 </form>
@@ -175,8 +175,8 @@ export default function AdminEvents() {
                     <button onClick={() => closeModalCreate()} className={"cursor-pointer bg-red-500 hover:bg-red-700 text-white rounded-full px-3 py-2"}><i className={"bi bi-x-lg"}/></button>
                 </div>
                 <form className={"w-full grid grid-cols-1 gap-4"} onSubmit={onSubmitCreate}>
-                    <input type={"text"} className={"w-full p-2 border border-gray-300 rounded-md"} placeholder={"Nom de l'événement"} value={name} onChange={(e) => setName(e.target.value)}/>
-                    <textarea className={"w-full h-48 p-2 border border-gray-300 rounded-md resize-none"} placeholder={"Description de l'événement"} value={description} onChange={(e) => setDescription(e.target.value)}/>
+                    <input type={"text"} className={"w-full p-2 border border-gray-300 rounded-md"} placeholder={"Nom de l&apos;événement"} value={name} onChange={(e) => setName(e.target.value)}/>
+                    <textarea className={"w-full h-48 p-2 border border-gray-300 rounded-md resize-none"} placeholder={"Description de l&apos;événement"} value={description} onChange={(e) => setDescription(e.target.value)}/>
                     <input type={"date"} className={"w-full p-2 border border-gray-300 rounded-md"} value={daytime} onChange={(e) => setDaytime(e.target.value)}/>
                     <button type={"submit"} className={"bg-blue-500 hover:bg-blue-700 text-white rounded-md p-2"}>Créer</button>
                 </form>
