@@ -161,7 +161,7 @@ export default function AdminReservations() {
                 </div>
 
                 <form onSubmit={(e) => onSubmit(e)} className={"w-full flex flex-col gap-2"}>
-                    <input type={"text"} value={id}/>
+                    <input type={"hidden"} value={id}/>
                     <input type={"text"} placeholder={"Nom"} value={name} onChange={(e) => setName(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
                     <input type={"number"} placeholder={"Personnes"} value={people} onChange={(e) => setPeople(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
                     <input type={"date"} placeholder={"Date"} value={daytime} onChange={(e) => setDaytime(e.target.value)} className={"w-full p-2 border rounded-md"} required/>
